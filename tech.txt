@@ -1,0 +1,15 @@
+Features =>
+	Night mode
+	Dynamic Wallpaper
+	Excel(Import, export)	
+
+Technologys =>
+	Puppetter
+	Multer
+	Socket
+	AI
+	Eslint
+	Typescript
+	Postgres
+	MongoDB
+	Docker	 

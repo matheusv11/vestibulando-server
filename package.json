@@ -1,0 +1,25 @@
+{
+  "name": "vestibulando-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:matheusv11/vestibulando-server.git",
+  "author": "matheus.silva <matheus.silva@icolabora.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "multer": "^1.4.4",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15",
+    "prisma": "^3.10.0",
+    "typescript": "^4.6.2"
+  }
+}
