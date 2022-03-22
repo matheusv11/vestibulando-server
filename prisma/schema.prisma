@@ -11,12 +11,21 @@ datasource db {
 }
 
 model users {
-  id    Int     @id @default(autoincrement())
-  name  String
-  email String  @unique
+  id       Int     @id @default(autoincrement())
+  name     String
+  // email String  @unique //CONTROLAR PELO BACK MESMO
+  email    String
+  password String
+  verified Boolean @default(false)
 }
 
 model vestibulars {
   id    Int     @id @default(autoincrement())
   name  String
+}
+
+model questions {
+  id    Int     @id @default(autoincrement())
+  // USAR ARRAY DO POSTGRES
+
 }
