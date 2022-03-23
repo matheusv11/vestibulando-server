@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id       Int     @id @default(autoincrement())
+  name     String
+  // email String  @unique //CONTROLAR PELO BACK MESMO
+  email    String
+  password String
+  verified Boolean @default(false)
+}
+
+model themes { // Matérias
+    id    Int     @id @default(autoincrement())
+    name  String
+    questions questions[]
+    subjects subjects[]
+    theme_vestibular theme_vestibular[] 
+    // vestibulars vestibulars[] // VÁRIOS PARA VÁRIOS
+
+    // name  String @db.VarChar(100)
+    // Para opção bilingue, seria necessario adicionar o idioma
+    // Assuntos e matérias são especificos de vestibulares?
+}
+
+model vestibulars {
+  id    Int     @id @default(autoincrement())
+  name  String
+  theme_vestibular theme_vestibular[]
+  // themes themes[] // VÁRIOS PARA VÁRIOS
+
+}
+
+model theme_vestibular {
+    id              Int   @id @default(autoincrement())
+    vestibular_id   Int
+    theme_id        Int
+    vestibular            vestibulars @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    theme                 themes@relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model questions {
+  id              Int       @id @default(autoincrement())
+  theme_id        Int
+  theme          themes    @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  // USAR ARRAY DO POSTGRES
+}
+
+model subjects { // Assuntos
+    id    Int     @id @default(autoincrement())
+    theme_id Int
+    name  String
+    theme themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
