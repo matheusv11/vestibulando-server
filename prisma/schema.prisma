@@ -13,19 +13,88 @@ datasource db {
 model users {
   id       Int     @id @default(autoincrement())
   name     String
-  // email String  @unique //CONTROLAR PELO BACK MESMO
   email    String
   password String
   verified Boolean @default(false)
+  favorite_questions favorite_questions[]
+  comments comments[]
+  answers answers[]
+}
+
+model themes { // Matérias
+  id    Int     @id @default(autoincrement())
+  name  String
+  questions questions[]
+  subjects subjects[]
+  vestibular_themes vestibular_themes[] 
 }
 
 model vestibulars {
   id    Int     @id @default(autoincrement())
   name  String
+  vestibular_themes vestibular_themes[]
 }
 
-model questions {
-  id    Int     @id @default(autoincrement())
-  // USAR ARRAY DO POSTGRES
 
+model questions {
+  id                  Int       @id @default(autoincrement())
+  theme_id            Int
+  question_subjects   question_subjects[]
+  favorite_questions  favorite_questions[]
+  comments            comments[]
+  answers             answers[]
+  theme               themes    @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model subjects { // Assuntos
+  id    Int     @id @default(autoincrement())
+  theme_id Int
+  name  String
+  question_subjects question_subjects[]
+  themes            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model vestibular_themes {
+  id              Int   @id @default(autoincrement())
+  vestibular_id   Int
+  theme_id        Int
+  vestibular             vestibulars @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  theme                  themes      @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model question_subjects {
+  id    Int     @id @default(autoincrement())
+  question_id Int
+  subject_id Int
+  question questions@relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  subject subjects@relation(fields: [subject_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  
+}
+
+model favorite_questions {
+  id            Int     @id @default(autoincrement()) // PODE USAR CHAVE COMPOSTA
+  user_id       Int
+  question_id   Int
+  user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model comments {
+  id Int        @id @default(autoincrement())
+  comment       String
+  user_id       Int
+  question_id   Int
+  user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model answers {
+  id   Int        @id @default(autoincrement())
+  user_id         Int
+  question_id     Int
+  correct         Boolean
+  selected        String
+  resolution_date DateTime
+  user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
