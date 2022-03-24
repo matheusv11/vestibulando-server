@@ -10,6 +10,12 @@ import jwt from "./middlewares/jwt";
 import testController from "./controllers/testController";
 import userController from "./controllers/userController";
 import authController from "./controllers/authController";
+import themeController from "./controllers/themeController";
+import subjectController from "./controllers/subjectController";
+import vestibularController from "./controllers/vestibularController";
+
+// import * as ob from "./controllers/subjectController";
+// ob.default
 
 // LIMITAR ROTAS
 router.get("/test", testController.test);
@@ -19,6 +25,23 @@ router.get("/test2", jwt.userAccess, testController.test);
 
 router.get("/user", userController.get);
 router.post("/user", joi("user"), userController.create);
+
+router.get("/theme", themeController.get);
+router.post("/theme", themeController.create);
+// router.put("/theme", themeController.create);
+router.patch("/theme/:id", themeController.update);
+router.delete("/theme/:id", themeController.delete);
+
+router.get("/subject", subjectController.get);
+router.post("/subject", subjectController.create);
+router.patch("/subject/:id", subjectController.update);
+router.delete("/subject/:id", subjectController.delete);
+
+router.get("/vestibular", vestibularController.get);
+router.post("/vestibular", vestibularController.create);
+router.patch("/vestibular/:id", vestibularController.update);
+router.delete("/vestibular/:id", vestibularController.delete);
+
 
 router.post("/auth", authController.auth);
 router.post("/token", authController.token)
