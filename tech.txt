@@ -12,7 +12,10 @@ Technologys =>
 	Typescript
 	Postgres
 	MongoDB
-	Docker	 
+	Docker
+	Composition API
+	Pino -> Vuex
+	Jest
 
 
 Code =>
@@ -22,3 +25,35 @@ Code =>
 	Use pivo tables on methods
 	Exclusive url for pivo tables, to update relations after creation and not only in creation
 	HandleErrors make sense? Only work for next methods and not for responses
+	Destruct params on methods
+	App.use(multer()) ?
+	x-www-form-urlencoded or multipart ?
+	For array data filter empty value or validate if is string or array
+	A good practice create direct on pivo table?
+
+TODO =>
+	Add themes on create vestibular
+	
+	Controller for question and pivo tables vestibular_themes, question_subjects
+
+	Some interactions doesnts have notification feedback, like edit a comment
+
+	HandleErrors
+
+	Global catch for prisma errors
+
+	Ids on HEADER REQUEST
+
+	FOR UPDATE, CREATE OR DELETE METHODS, GET TOKEN ID FROM USER AND NEEDS IN WHERE THE DEFAULT ID AND USER_ID OR RELATION ID
+
+	ORDER BY ID PRISMA
+
+	--------------
+
+	PREVENT DUPLICATE DATA
+	
+	JOI VALIDATION
+
+	ID VALIDATE IF EXIST
+
+	JWT TOKEN FOR USER TO PICK ID
