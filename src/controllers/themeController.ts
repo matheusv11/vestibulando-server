@@ -20,7 +20,7 @@ export default {
         // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
 
         await prisma.themes.create({
-            data: {
+            data: { // AO CRIAR UMA MATÉRIA DEVERIAR CRIAR OS ASSUNTOS TAMBÉM? // E PODERIA PEGAR OS ASSUNTOS ANTIGOS
                 name
             },
         });

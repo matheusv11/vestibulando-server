@@ -9,6 +9,7 @@ export default {
         // console.log("Request", res.locals.id);
         const response = await prisma.users.findMany();
         
+        console.log("Type", req.body)
         await prisma.$disconnect(); // USAR FINALLY // DESCONECTAR DEPOIS DE QUALQUER CONEXÃO
 
         return res.status(200).send(response);
