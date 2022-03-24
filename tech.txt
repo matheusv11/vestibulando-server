@@ -13,3 +13,12 @@ Technologys =>
 	Postgres
 	MongoDB
 	Docker	 
+
+
+Code =>
+	Use catch on prisma errors, a simple way for validate if foreign key exist instead of querying in database, most optimize way
+	Class for controllers, this method allow to repeat functions, like format a id
+	Test many to many os prisma
+	Use pivo tables on methods
+	Exclusive url for pivo tables, to update relations after creation and not only in creation
+	HandleErrors make sense? Only work for next methods and not for responses
