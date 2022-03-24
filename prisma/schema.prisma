@@ -51,7 +51,7 @@ model subjects { // Assuntos
   theme_id Int
   name  String
   question_subjects question_subjects[]
-  themes            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  theme            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model vestibular_themes {
@@ -98,3 +98,15 @@ model answers {
   user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
+
+// model conversations {
+//   id  Int @id @default(autoincrement())
+//   conversation String // BOM COLOCAR LIMITE
+//   from Int
+//   to Int
+//   user          users @relation(fields: [from, to], references: [id, id], onDelete: Cascade, onUpdate: Cascade)
+// }
+
+// RESPOSTA DE COMENTARIOS
+
+// CONVERSA DE CHAT
