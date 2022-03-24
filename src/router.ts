@@ -13,6 +13,9 @@ import authController from "./controllers/authController";
 import themeController from "./controllers/themeController";
 import subjectController from "./controllers/subjectController";
 import vestibularController from "./controllers/vestibularController";
+import commentController from "./controllers/commentController";
+import answerController from "./controllers/answerController";
+import favoriteController from "./controllers/favoriteController";
 
 // import * as ob from "./controllers/subjectController";
 // ob.default
@@ -42,6 +45,19 @@ router.post("/vestibular", vestibularController.create);
 router.patch("/vestibular/:id", vestibularController.update);
 router.delete("/vestibular/:id", vestibularController.delete);
 
+router.get("/comment", commentController.get);
+router.post("/comment", commentController.create);
+router.patch("/comment/:id", commentController.update);
+router.delete("/comment/:id", commentController.delete);
+
+router.get("/answer", answerController.get);
+router.post("/answer", answerController.create);
+router.patch("/answer/:id", answerController.update);
+router.delete("/answer/:id", answerController.delete);
+
+router.get("/favorite", favoriteController.get);
+router.post("/favorite", favoriteController.create);
+router.delete("/favorite/:id", favoriteController.delete);
 
 router.post("/auth", authController.auth);
 router.post("/token", authController.token)
