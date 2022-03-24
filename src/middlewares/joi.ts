@@ -5,8 +5,7 @@ import { Request, Response, NextFunction } from "express";
 type ReadingTypes = 'user' | 'login';
 
 export default (config: ReadingTypes) => (req: Request, res: Response, next: NextFunction) => {
-    const sexo = validation[config]
-    const schema = Joi.object(sexo).options({
+    const schema = Joi.object(validation[config]).options({
         messages: validation.messages,
         abortEarly: false
     });
