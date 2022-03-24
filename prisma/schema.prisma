@@ -39,6 +39,7 @@ model vestibulars {
 model questions {
   id                  Int       @id @default(autoincrement())
   theme_id            Int
+  answer              String
   question_subjects   question_subjects[]
   favorite_questions  favorite_questions[]
   comments            comments[]
@@ -54,7 +55,7 @@ model subjects { // Assuntos
   theme            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model vestibular_themes {
+model vestibular_themes { // TABELA PIVÔ
   id              Int   @id @default(autoincrement())
   vestibular_id   Int
   theme_id        Int
@@ -62,7 +63,7 @@ model vestibular_themes {
   theme                  themes      @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model question_subjects {
+model question_subjects { // TABELA PIVÔ // UMA QUESTAO PODE CONTER VARIOS ASSUNTOS
   id    Int     @id @default(autoincrement())
   question_id Int
   subject_id Int
@@ -71,7 +72,7 @@ model question_subjects {
   
 }
 
-model favorite_questions {
+model favorite_questions { // TABELA PIVÔ
   id            Int     @id @default(autoincrement()) // PODE USAR CHAVE COMPOSTA
   user_id       Int
   question_id   Int
@@ -79,7 +80,7 @@ model favorite_questions {
   question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model comments {
+model comments { // TABELA PIVÔ
   id Int        @id @default(autoincrement())
   comment       String
   user_id       Int
@@ -88,13 +89,15 @@ model comments {
   question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model answers {
+model answers { // TABELA PIVÔ
   id   Int        @id @default(autoincrement())
   user_id         Int
   question_id     Int
+  // answer String // Caso seja uma pergunta subjetiva
   correct         Boolean
   selected        String
-  resolution_date DateTime
+  resolution_date DateTime // Deixar o default NOW
+  // COLUNA DE UPDATED_AT
   user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
@@ -110,3 +113,5 @@ model answers {
 // RESPOSTA DE COMENTARIOS
 
 // CONVERSA DE CHAT
+
+// FEED
