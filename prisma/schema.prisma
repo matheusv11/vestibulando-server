@@ -39,6 +39,7 @@ model vestibulars {
 model questions {
   id                  Int       @id @default(autoincrement())
   theme_id            Int
+  alternatives        String //OU JSON, MAS SÓ FUNCIONA NO POSTGRES // O ANSWER PODERIA FICAR AQUI TAMBEM
   answer              String
   question_subjects   question_subjects[]
   favorite_questions  favorite_questions[]
