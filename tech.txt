@@ -1,7 +1,9 @@
 Features =>
 	Night mode
 	Dynamic Wallpaper
-	Excel(Import, export)	
+	Excel(Import, export)
+	Gabarito
+	Concursos
 
 Technologys =>
 	Puppetter
@@ -48,6 +50,10 @@ TODO =>
 
 	ORDER BY ID PRISMA
 
+	PAGINATION
+
+	GET SPECIF ITEM BY ID LIKE QUESTION
+	
 	--------------
 
 	PREVENT DUPLICATE DATA
