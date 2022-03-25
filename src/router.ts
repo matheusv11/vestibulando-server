@@ -16,6 +16,7 @@ import vestibularController from "./controllers/vestibularController";
 import commentController from "./controllers/commentController";
 import answerController from "./controllers/answerController";
 import favoriteController from "./controllers/favoriteController";
+import questionController from "./controllers/questionController";
 
 // import * as ob from "./controllers/subjectController";
 // ob.default
@@ -58,6 +59,11 @@ router.delete("/answer/:id", answerController.delete);
 router.get("/favorite", favoriteController.get);
 router.post("/favorite", favoriteController.create);
 router.delete("/favorite/:id", favoriteController.delete);
+
+router.get("/question", questionController.get);
+router.post("/question", questionController.create);
+router.patch("/question/:id", questionController.update);
+router.delete("/question/:id", questionController.delete);
 
 router.post("/auth", authController.auth);
 router.post("/token", authController.token)
