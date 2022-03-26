@@ -4,6 +4,10 @@ Features =>
 	Excel(Import, export)
 	Gabarito
 	Concursos
+	Criar proprio simulado, com horario e salvar no banco // VALIDO USAR O MONGO PRA ISSO
+	Plano de estudo
+	Send email
+	IA to filter sensitive content in image
 
 Technologys =>
 	Puppetter
@@ -15,6 +19,7 @@ Technologys =>
 	Postgres
 	MongoDB
 	Docker
+	Kubernets
 	Composition API
 	Pino -> Vuex
 	Jest
@@ -32,6 +37,7 @@ Code =>
 	x-www-form-urlencoded or multipart ?
 	For array data filter empty value or validate if is string or array
 	A good practice create direct on pivo table?
+	The json columns can be on mongo
 
 TODO =>
 	Add themes on create vestibular
@@ -53,6 +59,8 @@ TODO =>
 	PAGINATION
 
 	GET SPECIF ITEM BY ID LIKE QUESTION
+
+	RESET QUESTIONS  BUTTON IN OWN_VESTIBULARS OR AUTOMATICALY RESET QUESTION ANSWER AND NOTIFY OR ADD A NEW COLUMN FOR ANSWER IN OWN_VESTIBULAR
 	
 	--------------
 
@@ -63,3 +71,7 @@ TODO =>
 	ID VALIDATE IF EXIST
 
 	JWT TOKEN FOR USER TO PICK ID
+
+	DEFINE COLUMNS LENGTH
+
+	CAN UPDATE PIVO TABLES
