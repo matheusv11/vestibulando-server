@@ -2,14 +2,13 @@ import Joi from 'joi';
 import validation from '../config/validation'
 import { Request, Response, NextFunction } from "express";
 
-type ReadingTypes = 'user' | 'discipline' | 'subject' | 'vestibular' | 'answer' | 'favorite' | 'ownVestibular';
+type ReadingTypes = 'user' | 'discipline' | 'subject' | 'vestibular' | 'comment' | 'answer' | 'favorite' | 'question' | 'ownVestibular';
 
 export default (config: ReadingTypes) => (req: Request, res: Response, next: NextFunction) => {
-    const sexo = validation[config]
     const schema = Joi.object(validation[config]).options({
         messages: validation.messages,
         abortEarly: false
-    });
+    }).unknown(true); // UNKNOW É SOMENTE TEMPORARIO
 
     const { error } = schema.validate(req.body) // E VALIDAR PARAMS TALVEZ? SO OS QUERY, POIS O PARAMS É OBRIGATORIO MESMO
 

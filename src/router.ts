@@ -43,10 +43,8 @@ router.patch("/vestibular/:id", joi("vestibular"), vestibularController.update);
 router.delete("/vestibular/:id", vestibularController.delete);
 
 router.get("/comment", commentController.get);
-// router.post("/comment", joi("comment"), commentController.create);
-// router.patch("/comment/:id", joi("comment"), commentController.update);
-router.post("/comment", commentController.create);
-router.patch("/comment/:id", commentController.update);
+router.post("/comment", joi("comment"), commentController.create);
+router.patch("/comment/:id", joi("comment"), commentController.update);
 router.delete("/comment/:id", commentController.delete);
 
 router.get("/answer", answerController.get);
@@ -59,10 +57,8 @@ router.post("/favorite", joi("favorite"), favoriteController.create);
 router.delete("/favorite/:id", favoriteController.delete);
 
 router.get("/question", questionController.get);
-// router.post("/question", joi("question"), questionController.create);
-// router.patch("/question/:id", joi("question"), questionController.update);
-router.post("/question", questionController.create);
-router.patch("/question/:id", questionController.update);
+router.post("/question", joi("question"), questionController.create);
+router.patch("/question/:id", joi("question"), questionController.update);
 router.delete("/question/:id", questionController.delete);
 
 router.get("/own-vestibular", ownVestibularController.get);

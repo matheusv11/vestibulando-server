@@ -24,23 +24,23 @@ export default {
         name:  Joi.string().min(3).max(60).required(),
         disciplinesId: Joi.array().required()
     },
-    // comment: {
-    //     comment: Joi.string().min(1).max(300).required(),
-    //     questionId: Joi.number().required()
-    // },
+    comment: {
+        // comment: Joi.string().min(1).max(300).required(),
+        // questionId: Joi.number().required()
+    },
     answer: {
-
+        
     },
     favorite: {
 
     },
-    // question: {
-    //     alternatives: Joi.string().required(),
-    //     answer: Joi.string().required(),
-    //     disciplineId: Joi.number().required(),
-    //     vestibularId: Joi.number().required(),
-    //     subjectsId: Joi.array().required()
-    // },
+    question: {
+        // alternatives: Joi.string().required(),
+        // answer: Joi.string().required(),
+        // disciplineId: Joi.number().required(),
+        // vestibularId: Joi.number().required(),
+        // subjectsId: Joi.array().required()
+    },
     ownVestibular: {
 
     },
