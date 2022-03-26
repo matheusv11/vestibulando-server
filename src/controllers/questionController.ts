@@ -19,10 +19,11 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { alternatives, answer, themeId, subjectsId } = req.body // COLOCAR UM JOI
+        const { alternatives, answer, themeId, vestibularId, subjectsId } = req.body // COLOCAR UM JOI
 
         // VALIDAR OS SUBJECT ID
-        // EVITAR SUBJECT REPETIDO
+        // EVITAR SUBJECT REPETIDO`
+        // EVITAR QUE O SUBJECT ID SEJA DE OUTRA MATÉRIA
         
         await prisma.questions.create({
             data: {
@@ -33,7 +34,8 @@ export default {
                         data:  subjectsId.map((id: any) => id = { subject_id: parseInt(id) }) // OTIMA IDEIA
                     }
                 },
-                theme_id: parseInt(themeId)
+                theme_id: parseInt(themeId),
+                vestibular_id: parseInt(vestibularId)
             },
         });
         
@@ -45,7 +47,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { alternatives, answer, themeId, subjectsId } = req.body; // COLOCAR UM JOI
+        const { alternatives, answer, themeId, vestibularId, subjectsId } = req.body; // COLOCAR UM JOI
         const { id } = req.params;
 
         // VALIDAR SE THEME EXIST
@@ -67,6 +69,7 @@ export default {
                 answer,
                 alternatives: JSON.stringify(alternatives),
                 theme_id: parseInt(themeId),
+                vestibular_id: parseInt(vestibularId)
                 // question_subjects: { //PENDENTE
                 //     updateMany: {
                 //         where: {
@@ -94,7 +97,7 @@ export default {
             where: {
                 id: parseInt(id)
             }
-        })
+        });
 
         if(!question) return res.status(400).send({ message: "Questão não encontrada"});
 

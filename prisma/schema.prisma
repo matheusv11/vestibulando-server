@@ -19,9 +19,10 @@ model users {
   favorite_questions favorite_questions[]
   comments comments[]
   answers answers[]
+  own_vestibulars own_vestibulars[]
 }
 
-model themes { // Matérias
+model themes { // Matérias //DISCIPLINE
   id    Int     @id @default(autoincrement())
   name  String
   questions questions[]
@@ -29,23 +30,31 @@ model themes { // Matérias
   vestibular_themes vestibular_themes[] 
 }
 
-model vestibulars {
+model vestibulars { // ENTRANCE_EXAM
+  // VESTIBULAR GENERICO
   id    Int     @id @default(autoincrement())
   name  String
   vestibular_themes vestibular_themes[]
+  questions         questions[]
 }
 
 
 model questions {
+   // PODERIA DESCREVER O DETAILS, TIPO: PROVA CADERNO AZUL
+   // ANO DA QUESTÃO, PODERIA SER O DETAILS, EM UM JSON PADRÃO
+   // COLUNA DE ACERTOS, UM SCORE
   id                  Int       @id @default(autoincrement())
   theme_id            Int
+  vestibular_id       Int
   alternatives        String //OU JSON, MAS SÓ FUNCIONA NO POSTGRES // O ANSWER PODERIA FICAR AQUI TAMBEM
   answer              String
   question_subjects   question_subjects[]
   favorite_questions  favorite_questions[]
   comments            comments[]
   answers             answers[]
-  theme               themes    @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  own_vestibular_questions own_vestibular_questions[]
+  theme               themes        @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  vestibular          vestibulars   @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model subjects { // Assuntos
@@ -54,6 +63,15 @@ model subjects { // Assuntos
   name  String
   question_subjects question_subjects[]
   theme            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model own_vestibulars {
+  id   Int        @id @default(autoincrement())
+  user_id Int
+  name String
+  timer Int // HORAS : MINUTOS : SEGUNDOS // VAI SER O TEMPO EM SEGUNDOS NO CASO // AI SO CONVERTER
+  own_vestibular_questions own_vestibular_questions[]
+  user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model vestibular_themes { // TABELA PIVÔ
@@ -101,6 +119,14 @@ model answers { // TABELA PIVÔ
   // COLUNA DE UPDATED_AT
   user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   question      questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model own_vestibular_questions {
+    id                      Int        @id @default(autoincrement())
+    own_vestibular_id       Int
+    question_id             Int
+    own_vestibular      own_vestibulars @relation(fields: [own_vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    question            questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 // model conversations {
