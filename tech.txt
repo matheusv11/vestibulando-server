@@ -38,9 +38,14 @@ Code =>
 	For array data filter empty value or validate if is string or array
 	A good practice create direct on pivo table?
 	The json columns can be on mongo
+	Analyse prisma code, understand
 
 TODO =>
 	Add disciplines on create vestibular
+
+	Apostilhas de estudoA
+
+	Mapa mental
 	
 	Controller for question and pivo tables vestibular_disciplines, question_subjects
 

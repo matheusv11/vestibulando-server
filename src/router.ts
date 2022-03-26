@@ -28,42 +28,46 @@ router.get("/user", userController.get);
 router.post("/user", joi("user"), userController.create);
 
 router.get("/discipline", disciplineController.get);
-router.post("/discipline", disciplineController.create);
-router.patch("/discipline/:id", disciplineController.update);
+router.post("/discipline", joi("discipline"), disciplineController.create);
+router.patch("/discipline/:id", joi("discipline"), disciplineController.update);
 router.delete("/discipline/:id", disciplineController.delete);
 
 router.get("/subject", subjectController.get);
-router.post("/subject", subjectController.create);
-router.patch("/subject/:id", subjectController.update);
+router.post("/subject", joi("subject"), subjectController.create);
+router.patch("/subject/:id", joi("subject"), subjectController.update);
 router.delete("/subject/:id", subjectController.delete);
 
 router.get("/vestibular", vestibularController.get);
-router.post("/vestibular", vestibularController.create);
-router.patch("/vestibular/:id", vestibularController.update);
+router.post("/vestibular", joi("vestibular"), vestibularController.create);
+router.patch("/vestibular/:id", joi("vestibular"), vestibularController.update);
 router.delete("/vestibular/:id", vestibularController.delete);
 
 router.get("/comment", commentController.get);
+// router.post("/comment", joi("comment"), commentController.create);
+// router.patch("/comment/:id", joi("comment"), commentController.update);
 router.post("/comment", commentController.create);
 router.patch("/comment/:id", commentController.update);
 router.delete("/comment/:id", commentController.delete);
 
 router.get("/answer", answerController.get);
-router.post("/answer", answerController.create);
-router.patch("/answer/:id", answerController.update);
+router.post("/answer", joi("answer"), answerController.create);
+router.patch("/answer/:id", joi("answer"), answerController.update);
 router.delete("/answer/:id", answerController.delete);
 
 router.get("/favorite", favoriteController.get);
-router.post("/favorite", favoriteController.create);
+router.post("/favorite", joi("favorite"), favoriteController.create);
 router.delete("/favorite/:id", favoriteController.delete);
 
 router.get("/question", questionController.get);
+// router.post("/question", joi("question"), questionController.create);
+// router.patch("/question/:id", joi("question"), questionController.update);
 router.post("/question", questionController.create);
 router.patch("/question/:id", questionController.update);
 router.delete("/question/:id", questionController.delete);
 
 router.get("/own-vestibular", ownVestibularController.get);
-router.post("/own-vestibular", ownVestibularController.create);
-router.patch("/own-vestibular/:id", ownVestibularController.update);
+router.post("/own-vestibular", joi("ownVestibular"), ownVestibularController.create);
+router.patch("/own-vestibular/:id", joi("ownVestibular"), ownVestibularController.update);
 router.delete("/own-vestibular/:id", ownVestibularController.delete);
 
 router.post("/auth", authController.auth);

@@ -15,7 +15,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name } = req.body // COLOCAR UM JOI
+        const { name } = req.body
         // EVITAR MATERIA REPETIDA
         // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
 
@@ -29,7 +29,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { name } = req.body; // COLOCAR UM JOI
+        const { name } = req.body;
         const { id } = req.params;
 
         const discipline = await prisma.disciplines.findUnique({

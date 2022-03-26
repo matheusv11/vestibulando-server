@@ -15,7 +15,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { userId, questionId } = req.body // COLOCAR UM JOI
+        const { userId, questionId } = req.body
 
         //VALIDAR SE EXISTEM USERID E QUESTION ID
 

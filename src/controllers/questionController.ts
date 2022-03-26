@@ -19,7 +19,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body // COLOCAR UM JOI
+        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body
 
         // VALIDAR OS SUBJECT ID
         // EVITAR SUBJECT REPETIDO`
@@ -47,7 +47,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body; // COLOCAR UM JOI
+        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body;
         const { id } = req.params;
 
         // VALIDAR SE discipline EXIST

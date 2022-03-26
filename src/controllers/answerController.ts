@@ -14,7 +14,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { selected, questionId, userId } = req.body // COLOCAR UM JOI // OS ID PODERIA VIR DO HEADER
+        const { selected, questionId, userId } = req.body // OS ID PODERIA VIR DO HEADER
 
         // VALIDAR SE O USER E QUESTION ID EXISTEM
         
@@ -43,7 +43,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { selected, questionId } = req.body; // COLOCAR UM JOI //PEGAR O USER ID PELO TOKEN
+        const { selected, questionId } = req.body; //PEGAR O USER ID PELO TOKEN
         const { id } = req.params; // USAR FORMA DE PEGA A RESPOSTA CERTA SEM PRECISAR PASSAR OUTRA ID DE QUESTAO
         // PEGAR RESPOSTA CERTO POR DB QUERY, PARAMS OU BODY?
         // BUSCAR PELA QUERY ABAIXO COM A RELAÇÃO DO PRISMA

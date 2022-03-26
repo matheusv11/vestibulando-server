@@ -9,9 +9,40 @@ export default {
         email: Joi.string().email().required(),
         password: Joi.string().min(6).max(26).required()
     },
-    login: {
-        email: Joi.string().email().required(),
-        senha: Joi.string().required()
+    // login: {
+    //     email: Joi.string().email().required(),
+    //     password: Joi.string().required()
+    // },
+    discipline: {
+        name:  Joi.string().min(3).max(60).required(),
+    },
+    subject: {
+        name:  Joi.string().min(3).max(60).required(),
+        disciplineId: Joi.number().required()
+    },
+    vestibular: {
+        name:  Joi.string().min(3).max(60).required(),
+        disciplinesId: Joi.array().required()
+    },
+    // comment: {
+    //     comment: Joi.string().min(1).max(300).required(),
+    //     questionId: Joi.number().required()
+    // },
+    answer: {
+
+    },
+    favorite: {
+
+    },
+    // question: {
+    //     alternatives: Joi.string().required(),
+    //     answer: Joi.string().required(),
+    //     disciplineId: Joi.number().required(),
+    //     vestibularId: Joi.number().required(),
+    //     subjectsId: Joi.array().required()
+    // },
+    ownVestibular: {
+
     },
     messages: {
         "string.base": `{#key} precisar ser um 'texto'`,

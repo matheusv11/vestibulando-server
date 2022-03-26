@@ -22,7 +22,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name, timer, userId, questionsId } = req.body // COLOCAR UM JOI
+        const { name, timer, userId, questionsId } = req.body
 
         await prisma.own_vestibulars.create({
             data: {

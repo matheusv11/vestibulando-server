@@ -15,7 +15,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { comment, questionId, userId } = req.body // COLOCAR UM JOI
+        const { comment, questionId, userId } = req.body
 
         // BOM VALIDAR O QUESTIONID E USERID
         // OU UM CATCH GLOBAL PARA DISPARAR OS ERROS
@@ -34,7 +34,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { comment: commentText } = req.body; // COLOCAR UM JOI
+        const { comment: commentText } = req.body;
         const { id } = req.params;
 
         const comment = await prisma.comments.findUnique({

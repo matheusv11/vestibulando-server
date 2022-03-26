@@ -14,7 +14,7 @@ export default {
     },
 
     async create(req: Request, res: Response) { // COMPARAR COM RESPONDER ENEM
-        const { name, disciplineId } = req.body // COLOCAR UM JOI
+        const { name, disciplineId } = req.body
         // TALVEZ O IDEAL SERIA APENAS UM ASSUNTO SER PERTENCE A UMA MATERIA
 
         // VALIDAR SE A MATERIA EXISTE
@@ -38,7 +38,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { name } = req.body; // COLOCAR UM JOI
+        const { name, disciplineId } = req.body; // NÃO DEVE SER OBRIGATÓRIO
         const { id } = req.params;
 
         const subject = await prisma.subjects.findUnique({
@@ -54,7 +54,8 @@ export default {
                 id: parseInt(id)
             },
             data: {
-                name
+                name,
+                discipline_id: parseInt(disciplineId)
             },
         });
 
