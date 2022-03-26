@@ -40,9 +40,9 @@ Code =>
 	The json columns can be on mongo
 
 TODO =>
-	Add themes on create vestibular
+	Add disciplines on create vestibular
 	
-	Controller for question and pivo tables vestibular_themes, question_subjects
+	Controller for question and pivo tables vestibular_disciplines, question_subjects
 
 	Some interactions doesnts have notification feedback, like edit a comment
 
@@ -62,6 +62,7 @@ TODO =>
 
 	RESET QUESTIONS  BUTTON IN OWN_VESTIBULARS OR AUTOMATICALY RESET QUESTION ANSWER AND NOTIFY OR ADD A NEW COLUMN FOR ANSWER IN OWN_VESTIBULAR
 	
+	STUDY GROUPS
 	--------------
 
 	PREVENT DUPLICATE DATA

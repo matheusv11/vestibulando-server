@@ -10,7 +10,7 @@ import jwt from "./middlewares/jwt";
 import testController from "./controllers/testController";
 import userController from "./controllers/userController";
 import authController from "./controllers/authController";
-import themeController from "./controllers/themeController";
+import disciplineController from "./controllers/disciplineController";
 import subjectController from "./controllers/subjectController";
 import vestibularController from "./controllers/vestibularController";
 import commentController from "./controllers/commentController";
@@ -23,19 +23,14 @@ import ownVestibularController from "./controllers/ownVestibularController";
 // ob.default
 
 // LIMITAR ROTAS
-router.get("/test", testController.test);
-router.get("/test2", jwt.userAccess, testController.test);
-
-// router.get("x", ["metodo", "metodo"], "controller") // EX: https://www.youtube.com/watch?v=jHQAfPFrTPo
 
 router.get("/user", userController.get);
 router.post("/user", joi("user"), userController.create);
 
-router.get("/theme", themeController.get);
-router.post("/theme", themeController.create);
-// router.put("/theme", themeController.create);
-router.patch("/theme/:id", themeController.update);
-router.delete("/theme/:id", themeController.delete);
+router.get("/discipline", disciplineController.get);
+router.post("/discipline", disciplineController.create);
+router.patch("/discipline/:id", disciplineController.update);
+router.delete("/discipline/:id", disciplineController.delete);
 
 router.get("/subject", subjectController.get);
 router.post("/subject", subjectController.create);
@@ -73,5 +68,9 @@ router.delete("/own-vestibular/:id", ownVestibularController.delete);
 
 router.post("/auth", authController.auth);
 router.post("/token", authController.token)
+
+router.get("/test", testController.test);
+router.get("/test2", jwt.userAccess, testController.test);
+// router.get("x", ["metodo", "metodo"], "controller") // EX: https://www.youtube.com/watch?v=jHQAfPFrTPo
 
 export default router;

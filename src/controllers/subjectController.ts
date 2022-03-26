@@ -14,23 +14,23 @@ export default {
     },
 
     async create(req: Request, res: Response) { // COMPARAR COM RESPONDER ENEM
-        const { name, themeId } = req.body // COLOCAR UM JOI
+        const { name, disciplineId } = req.body // COLOCAR UM JOI
         // TALVEZ O IDEAL SERIA APENAS UM ASSUNTO SER PERTENCE A UMA MATERIA
 
         // VALIDAR SE A MATERIA EXISTE
 
-        const theme = await prisma.themes.findUnique({
+        const discipline = await prisma.disciplines.findUnique({
             where: {
-                id: parseInt(themeId)
+                id: parseInt(disciplineId)
             }
         });
 
-        if(!theme) return res.status(400).send({ message: "Matéria não encotrada "});
+        if(!discipline) return res.status(400).send({ message: "Matéria não encotrada "});
 
         await prisma.subjects.create({
             data: {
                 name,
-                theme_id: parseInt(themeId) // OBRIGATORIO, MESMO TENDO ?, CHAVE ESTRANGEIRA
+                discipline_id: parseInt(disciplineId) // OBRIGATORIO, MESMO TENDO ?, CHAVE ESTRANGEIRA
             }
         }); // PODE USAR UM CATCH DO PRISMA
 

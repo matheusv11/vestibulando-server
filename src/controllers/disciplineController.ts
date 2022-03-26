@@ -7,7 +7,7 @@ export default {
     async get(req: Request, res: Response) {
 
         // console.log("Request", res.locals.id);
-        const response = await prisma.themes.findMany();
+        const response = await prisma.disciplines.findMany();
         
         await prisma.$disconnect(); // USAR FINALLY // DESCONECTAR DEPOIS DE QUALQUER CONEXÃO
 
@@ -19,7 +19,7 @@ export default {
         // EVITAR MATERIA REPETIDA
         // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
 
-        await prisma.themes.create({
+        await prisma.disciplines.create({
             data: { // AO CRIAR UMA MATÉRIA DEVERIAR CRIAR OS ASSUNTOS TAMBÉM? // E PODERIA PEGAR OS ASSUNTOS ANTIGOS
                 name
             },
@@ -32,18 +32,18 @@ export default {
         const { name } = req.body; // COLOCAR UM JOI
         const { id } = req.params;
 
-        const theme = await prisma.themes.findUnique({
+        const discipline = await prisma.disciplines.findUnique({
             where: {
                 id: parseInt(id)
             }
         })
 
-        if(!theme) return res.status(400).send({ message: "Matéria não encontrada"})
+        if(!discipline) return res.status(400).send({ message: "Matéria não encontrada"})
         // VALIDAR SE EXISTE PARA ATUALIZAR
         // EVITAR MATERIA REPETIDA
         // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
 
-        await prisma.themes.update({
+        await prisma.disciplines.update({
             where: {
                 id: parseInt(id)
             },
@@ -60,15 +60,15 @@ export default {
 
         // VALIDAR SE EXISTE PARA DELETAR
 
-        const theme = await prisma.themes.findUnique({
+        const discipline = await prisma.disciplines.findUnique({
             where: {
                 id: parseInt(id)
             }
         })
 
-        if(!theme) return res.status(400).send({ message: "Matéria não encontrada"})
+        if(!discipline) return res.status(400).send({ message: "Matéria não encontrada"})
 
-        await prisma.themes.delete({
+        await prisma.disciplines.delete({
             where: {
                 id: parseInt(id)
             }

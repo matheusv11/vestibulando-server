@@ -19,7 +19,7 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { alternatives, answer, themeId, vestibularId, subjectsId } = req.body // COLOCAR UM JOI
+        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body // COLOCAR UM JOI
 
         // VALIDAR OS SUBJECT ID
         // EVITAR SUBJECT REPETIDO`
@@ -34,7 +34,7 @@ export default {
                         data:  subjectsId.map((id: any) => id = { subject_id: parseInt(id) }) // OTIMA IDEIA
                     }
                 },
-                theme_id: parseInt(themeId),
+                discipline_id: parseInt(disciplineId),
                 vestibular_id: parseInt(vestibularId)
             },
         });
@@ -47,10 +47,10 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { alternatives, answer, themeId, vestibularId, subjectsId } = req.body; // COLOCAR UM JOI
+        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body; // COLOCAR UM JOI
         const { id } = req.params;
 
-        // VALIDAR SE THEME EXIST
+        // VALIDAR SE discipline EXIST
         // PARA FACILITAR O PROCESSO DE CRIAR OS ASSUNTOS, TODO ASSUNTO ENVIADO SEMRPRE SERÁ UM ARRAY
 
         const question = await prisma.questions.findUnique({
@@ -68,7 +68,7 @@ export default {
             data: {
                 answer,
                 alternatives: JSON.stringify(alternatives),
-                theme_id: parseInt(themeId),
+                discipline_id: parseInt(disciplineId),
                 vestibular_id: parseInt(vestibularId)
                 // question_subjects: { //PENDENTE
                 //     updateMany: {

@@ -22,19 +22,19 @@ model users {
   own_vestibulars own_vestibulars[]
 }
 
-model themes { // Matérias //DISCIPLINE
+model disciplines { // Matérias //DISCIPLINE
   id    Int     @id @default(autoincrement())
   name  String
   questions questions[]
   subjects subjects[]
-  vestibular_themes vestibular_themes[] 
+  vestibular_disciplines vestibular_disciplines[] 
 }
 
 model vestibulars { // ENTRANCE_EXAM
   // VESTIBULAR GENERICO
   id    Int     @id @default(autoincrement())
   name  String
-  vestibular_themes vestibular_themes[]
+  vestibular_disciplines vestibular_disciplines[]
   questions         questions[]
 }
 
@@ -44,7 +44,7 @@ model questions {
    // ANO DA QUESTÃO, PODERIA SER O DETAILS, EM UM JSON PADRÃO
    // COLUNA DE ACERTOS, UM SCORE
   id                  Int       @id @default(autoincrement())
-  theme_id            Int
+  discipline_id            Int
   vestibular_id       Int
   alternatives        String //OU JSON, MAS SÓ FUNCIONA NO POSTGRES // O ANSWER PODERIA FICAR AQUI TAMBEM
   answer              String
@@ -53,16 +53,16 @@ model questions {
   comments            comments[]
   answers             answers[]
   own_vestibular_questions own_vestibular_questions[]
-  theme               themes        @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  discipline               disciplines        @relation(fields: [discipline_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   vestibular          vestibulars   @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model subjects { // Assuntos
   id    Int     @id @default(autoincrement())
-  theme_id Int
+  discipline_id Int
   name  String
   question_subjects question_subjects[]
-  theme            themes @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  discipline            disciplines @relation(fields: [discipline_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model own_vestibulars {
@@ -74,12 +74,12 @@ model own_vestibulars {
   user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model vestibular_themes { // TABELA PIVÔ
+model vestibular_disciplines { // TABELA PIVÔ
   id              Int   @id @default(autoincrement())
   vestibular_id   Int
-  theme_id        Int
+  discipline_id        Int
   vestibular             vestibulars @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  theme                  themes      @relation(fields: [theme_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  discipline                  disciplines      @relation(fields: [discipline_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model question_subjects { // TABELA PIVÔ // UMA QUESTAO PODE CONTER VARIOS ASSUNTOS
@@ -131,11 +131,20 @@ model own_vestibular_questions {
 
 // model conversations {
 //   id  Int @id @default(autoincrement())
-//   conversation String // BOM COLOCAR LIMITE
+//   message String // BOM COLOCAR LIMITE
+//   // DATA DA CONVERSA
+//   // TABELA DE MENSAGENS?
+//   // TABELA PIVÔ
 //   from Int
 //   to Int
-//   user          users @relation(fields: [from, to], references: [id, id], onDelete: Cascade, onUpdate: Cascade)
+//   // user          users @relation(fields: [from, to], references: [id, id], onDelete: Cascade, onUpdate: Cascade)
 // }
+
+// model StudyPlan
+
+// model studyGroup
+
+// GRUPO DE ESTUDOS
 
 // RESPOSTA DE COMENTARIOS
 
