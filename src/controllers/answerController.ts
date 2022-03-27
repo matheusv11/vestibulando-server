@@ -14,7 +14,9 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { selected, questionId, userId } = req.body // OS ID PODERIA VIR DO HEADER
+        const { selected, questionId } = req.body // OS ID PODERIA VIR DO HEADER
+        const { userId } = res.locals
+        // EVITAR RESPOSTA REPETIDA
 
         // VALIDAR SE O USER E QUESTION ID EXISTEM
         
@@ -24,8 +26,6 @@ export default {
                 id: parseInt(questionId)
             }
         }); 
-
-        // TS RECLAMA SEM TER IF, POR PODER SER NULO
 
         await prisma.answers.create({
             data: {
@@ -45,6 +45,7 @@ export default {
     async update(req: Request, res: Response) {
         const { selected, questionId } = req.body; //PEGAR O USER ID PELO TOKEN
         const { id } = req.params; // USAR FORMA DE PEGA A RESPOSTA CERTA SEM PRECISAR PASSAR OUTRA ID DE QUESTAO
+        const { userId } = res.locals
         // PEGAR RESPOSTA CERTO POR DB QUERY, PARAMS OU BODY?
         // BUSCAR PELA QUERY ABAIXO COM A RELAÇÃO DO PRISMA
 
@@ -53,8 +54,8 @@ export default {
                 id: parseInt(id)
             }
         });
-
-        if(!answer) return res.status(400).send({ message: "Resposta não encontrada"})
+        // VALIDAR SE É O DO USUARIO TAMBÉM
+        if(!answer) return res.status(400).send({ message: "Resposta não encontrada"});
     
         // VALIDAR O QUESTION ID
         const correct = await prisma.questions.findUnique({
@@ -63,9 +64,10 @@ export default {
             }
         }); 
         
-        await prisma.answers.update({
+        await prisma.answers.updateMany({
             where: {
-                id: parseInt(id) // USAR OUTRO WHERE PARA O QUESTION ID E USER ID
+                id: parseInt(id),
+                user_id: parseInt(userId)
             },
             data: {
                 correct: correct?.answer === selected,
@@ -80,6 +82,7 @@ export default {
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
+        const { userId } = res.locals
 
         const answer = await prisma.answers.findUnique({
             where: {
@@ -89,9 +92,10 @@ export default {
 
         if(!answer) return res.status(400).send({ message: "Resposta não encontrada"})
 
-        await prisma.answers.delete({
+        await prisma.answers.deleteMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
         });
 

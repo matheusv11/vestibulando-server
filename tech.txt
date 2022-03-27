@@ -1,13 +1,14 @@
 Features =>
 	Night mode
 	Dynamic Wallpaper
-	Excel(Import, export)
+	Excel(Import, export) -> Vestibular or ownVestibular
 	Gabarito
 	Concursos
 	Criar proprio simulado, com horario e salvar no banco // VALIDO USAR O MONGO PRA ISSO
 	Plano de estudo
 	Send email
-	IA to filter sensitive content in image
+	IA to filter sensitive content in image\
+	Online class, video material
 
 Technologys =>
 	Puppetter
@@ -52,6 +53,8 @@ TODO =>
 	Some interactions doesnts have notification feedback, like edit a comment
 
 	HandleErrors
+
+	Google Login
 
 	Global catch for prisma errors
 

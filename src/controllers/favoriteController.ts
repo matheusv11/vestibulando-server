@@ -15,7 +15,8 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { userId, questionId } = req.body
+        const { questionId } = req.body
+        const { userId } = res.locals
 
         //VALIDAR SE EXISTEM USERID E QUESTION ID
 
@@ -43,18 +44,20 @@ export default {
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
+        const { userId } = res.locals
 
         const favorite = await prisma.favorite_questions.findUnique({
             where: {
                 id: parseInt(id)
             }
-        })
+        });
 
         if(!favorite) return res.status(400).send({ message: "Questão favoritada não encontrada"})
 
-        await prisma.favorite_questions.delete({
+        await prisma.favorite_questions.deleteMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
         });
 

@@ -30,7 +30,7 @@ export default {
             expiresIn: '1m'
         });
 
-        res.locals.refreshTokens = [...res.locals.refreshTokens, refreshToken];
+        // res.locals.refreshTokens = [...res.locals.refreshTokens, refreshToken];
         // refreshTokens.push(refreshToken);
 
         await prisma.$disconnect(); // USAR FINALLY // DESCONECTAR DEPOIS DE QUALQUER CONEXÃO

@@ -35,4 +35,7 @@ export default {
 
         return res.status(201).send({ message: "Usuário criado"});
     }
+
+
+    // METODO CREATE E DELETE
 }

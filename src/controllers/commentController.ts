@@ -15,7 +15,8 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { comment, questionId, userId } = req.body
+        const { comment, questionId } = req.body
+        const { userId } = res.locals
 
         // BOM VALIDAR O QUESTIONID E USERID
         // OU UM CATCH GLOBAL PARA DISPARAR OS ERROS
@@ -36,18 +37,20 @@ export default {
     async update(req: Request, res: Response) {
         const { comment: commentText } = req.body;
         const { id } = req.params;
+        const { userId } = res.locals
 
         const comment = await prisma.comments.findUnique({
             where: {
                 id: parseInt(id)
             }
-        })
+        });
 
         if(!comment) return res.status(400).send({ message: "Comentário não encontrado"});
 
-        await prisma.comments.update({
+        await prisma.comments.updateMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             },
             data: {
                 comment: commentText
@@ -61,6 +64,7 @@ export default {
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
+        const { userId } = res.locals
 
         const comment = await prisma.comments.findUnique({
             where: {
@@ -70,11 +74,12 @@ export default {
 
         if(!comment) return res.status(400).send({ message: "Comentário não encontrado"});
 
-        await prisma.comments.delete({
+        await prisma.comments.deleteMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
-        })
+        });
 
         await prisma.$disconnect();
 

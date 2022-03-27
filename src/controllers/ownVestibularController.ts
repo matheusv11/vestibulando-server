@@ -22,7 +22,8 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name, timer, userId, questionsId } = req.body
+        const { name, timer, questionsId } = req.body
+        const { userId } = res.locals
 
         await prisma.own_vestibulars.create({
             data: {
@@ -45,6 +46,7 @@ export default {
     async update(req: Request, res: Response) {
         const { name, timer, questionsId } = req.body; // PEGAR O USER_ID, MAS SO PARA O WHERE
         const { id } = req.params;
+        const { userId } = res.locals
 
         const vestibular = await prisma.own_vestibulars.findUnique({
             where: {
@@ -54,9 +56,10 @@ export default {
 
         if(!vestibular) return res.status(400).send({ message: "Vestibular próprio não encontrado"})
 
-        await prisma.own_vestibulars.update({
+        await prisma.own_vestibulars.updateMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             },
             data: {
                 name,
@@ -74,6 +77,7 @@ export default {
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
+        const { userId } = res.locals
 
         const vestibular = await prisma.own_vestibulars.findUnique({
             where: {
@@ -83,9 +87,10 @@ export default {
 
         if(!vestibular) return res.status(400).send({ message: "Vestibular próprio não encontrado"});
 
-        await prisma.own_vestibulars.delete({
+        await prisma.own_vestibulars.deleteMany({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
         });
 
