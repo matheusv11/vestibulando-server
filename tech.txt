@@ -40,6 +40,8 @@ Code =>
 	A good practice create direct on pivo table?
 	The json columns can be on mongo
 	Analyse prisma code, understand
+	Mock database
+	Dont need validate user_id, jwt make'it
 
 TODO =>
 	Add disciplines on create vestibular

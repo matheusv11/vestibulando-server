@@ -22,7 +22,7 @@ export default {
             // return next({status: 401, message: 'Email ou senha incorretos'});
         }
 
-        const AcessToken= jwt.sign({ id: result.id }, process.env.JWT_SECRET || 'secret@123', {
+        const acessToken= jwt.sign({ id: result.id }, process.env.JWT_SECRET || 'secret@123', {
             expiresIn: '240min'
         });
 
@@ -35,7 +35,7 @@ export default {
 
         await prisma.$disconnect(); // USAR FINALLY // DESCONECTAR DEPOIS DE QUALQUER CONEXÃO
         
-        return res.status(200).send({ AcessToken, refreshToken });
+        return res.status(200).send({ acessToken, refreshToken });
 
     },
 

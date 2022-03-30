@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient() // INSTANCIAR PRISMA EM TODA APLICAÇÃO
+const prisma = new PrismaClient(); // INSTANCIAR PRISMA EM TODA APLICAÇÃO
 
 export default {
     async get(req: Request, res: Response) {
@@ -14,18 +14,14 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { selected, questionId } = req.body // OS ID PODERIA VIR DO HEADER
+        const { selected, questionId } = req.body
         const { userId } = res.locals
-        // EVITAR RESPOSTA REPETIDA
-
-        // VALIDAR SE O USER E QUESTION ID EXISTEM
         
-        // const { answer: correct }
         const correct = await prisma.questions.findUnique({
             where: {
                 id: parseInt(questionId)
             }
-        }); 
+        });
 
         await prisma.answers.create({
             data: {
