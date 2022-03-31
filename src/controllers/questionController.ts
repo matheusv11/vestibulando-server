@@ -27,7 +27,7 @@ export default {
         
         await prisma.questions.create({
             data: {
-                alternatives: JSON.stringify(alternatives),
+                alternatives: JSON.stringify(alternatives), //TIPAR ALTERNATIVAS
                 answer,
                 question_subjects: {
                     createMany: {
@@ -50,6 +50,8 @@ export default {
         const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body;
         const { id } = req.params;
 
+        // REGRA DE NEGOCIO, A DISCIPLINA TEM QUE SER PERTENCENTE AO VESTIBULAR // VAI SER INUTILIZADA AO MOMENTO
+        // OS ASSUNTOS DEVEM SER DA MATERIA
         // VALIDAR SE discipline EXIST
         // PARA FACILITAR O PROCESSO DE CRIAR OS ASSUNTOS, TODO ASSUNTO ENVIADO SEMRPRE SERÁ UM ARRAY
 

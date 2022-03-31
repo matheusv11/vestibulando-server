@@ -3,10 +3,21 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient() // INSTANCIAR PRISMA EM TODA APLICAÇÃO
 
+
+type ParamQuery =  {
+    disciplineId: string
+}
+
 export default {
     async get(req: Request, res: Response) {
 
-        const response = await prisma.subjects.findMany(); //INCLUDE NA MATERIA
+        const { disciplineId } = req.query as ParamQuery // PARAMETROS NÃO OBRIGATORIOS // USAR UM SUBSTITUTO DO as
+
+        const response = await prisma.subjects.findMany({
+            where: {
+                discipline_id: parseInt(disciplineId) || undefined // PRISMA LIDA COM OS UNDEFINED
+            }
+        }); //INCLUDE NA MATERIA
         
         await prisma.$disconnect(); // USAR FINALLY // DESCONECTAR DEPOIS DE QUALQUER CONEXÃO
 
