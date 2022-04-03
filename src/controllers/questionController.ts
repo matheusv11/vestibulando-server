@@ -7,9 +7,15 @@ export default {
     async get(req: Request, res: Response) {
 
         // console.log("Request", res.locals.id);
-        const response = await prisma.questions.findMany({
+        const response = await prisma.questions.findMany({ // TIPAR RETORNO
             include: {
-                question_subjects: true
+                discipline: true,
+                vestibular: true,
+                question_subjects: {
+                    include: {
+                        subject: true
+                    }
+                }
             }
         });
 
@@ -19,8 +25,9 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body
+        const { alternatives, title, answer, disciplineId, vestibularId, subjectsId } = req.body
 
+        console.log("Sim")
         // VALIDAR OS SUBJECT ID
         // EVITAR SUBJECT REPETIDO`
         // EVITAR QUE O SUBJECT ID SEJA DE OUTRA MATÉRIA
@@ -29,6 +36,7 @@ export default {
             data: {
                 alternatives: JSON.stringify(alternatives), //TIPAR ALTERNATIVAS
                 answer,
+                title,
                 question_subjects: {
                     createMany: {
                         data:  subjectsId.map((id: any) => id = { subject_id: parseInt(id) }) // OTIMA IDEIA
@@ -47,7 +55,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { alternatives, answer, disciplineId, vestibularId, subjectsId } = req.body;
+        const { alternatives, title, answer, disciplineId, vestibularId, subjectsId } = req.body;
         const { id } = req.params;
 
         // REGRA DE NEGOCIO, A DISCIPLINA TEM QUE SER PERTENCENTE AO VESTIBULAR // VAI SER INUTILIZADA AO MOMENTO
@@ -69,6 +77,7 @@ export default {
             },
             data: {
                 answer,
+                title,
                 alternatives: JSON.stringify(alternatives),
                 discipline_id: parseInt(disciplineId),
                 vestibular_id: parseInt(vestibularId)

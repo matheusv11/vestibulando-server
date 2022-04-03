@@ -46,6 +46,7 @@ model questions {
   id                  Int       @id @default(autoincrement())
   discipline_id            Int
   vestibular_id       Int
+  title               String
   alternatives        String //OU JSON, MAS SÓ FUNCIONA NO POSTGRES // O ANSWER PODERIA FICAR AQUI TAMBEM
   answer              String
   question_subjects   question_subjects[]
