@@ -9,10 +9,11 @@ export default {
         email: Joi.string().email().required(),
         password: Joi.string().min(6).max(26).required()
     },
-    // login: {
-    //     email: Joi.string().email().required(),
-    //     password: Joi.string().required()
-    // },
+    login: {
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    },
     discipline: {
         name:  Joi.string().min(3).max(60).required(),
     },
@@ -46,11 +47,12 @@ export default {
         questionId: Joi.number().required()
     },
     question: {
-        // alternatives: Joi.string().required(),
-        // answer: Joi.string().required(),
-        // disciplineId: Joi.number().required(),
-        // vestibularId: Joi.number().required(),
-        // subjectsId: Joi.array().required()
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        alternatives: Joi.string().required(),
+        answer: Joi.string().required(),
+        disciplineId: Joi.number().required(),
+        vestibularId: Joi.number().required(),
+        subjectsId: Joi.array().required()
     },
     ownVestibular: {
 
