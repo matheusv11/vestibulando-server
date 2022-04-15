@@ -28,7 +28,13 @@ export default {
         const { name, disciplineId } = req.body
         // TALVEZ O IDEAL SERIA APENAS UM ASSUNTO SER PERTENCE A UMA MATERIA
 
-        // VALIDAR SE A MATERIA EXISTE
+        const subject = await prisma.subjects.findFirst({
+            where: {
+                name
+            }
+        });
+
+        if(subject) return res.status(401).send({ message: "Assunto já criado"});
 
         const discipline = await prisma.disciplines.findUnique({
             where: {
@@ -58,7 +64,15 @@ export default {
             }
         })
 
-        if(!subject) return res.status(400).send({ message: "Assunto não encontrado"})
+        if(!subject) return res.status(400).send({ message: "Assunto não encontrado"});
+
+        const discipline = await prisma.disciplines.findUnique({
+            where: {
+                id: parseInt(disciplineId)
+            }
+        });
+
+        if(!discipline) return res.status(400).send({ message: "Matéria não encotrada "});
 
         await prisma.subjects.update({
             where: {
