@@ -33,7 +33,13 @@ export default {
         comment: Joi.string().min(1).max(300).required()
     },
     answer: {
-        
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        selected: Joi.string().min(1).max(2).required(),
+        questionId: Joi.number().required()
+    },
+    updateAnswer: {
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        selected: Joi.string().min(1).max(2).required()
     },
     favorite: {
 

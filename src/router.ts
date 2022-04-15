@@ -49,7 +49,7 @@ router.delete("/comment/:id", jwt.userAccess, commentController.delete);
 
 router.get("/answer", answerController.get);
 router.post("/answer", joi("answer"), jwt.userAccess, answerController.create);
-router.patch("/answer/:id", joi("answer"), jwt.userAccess, answerController.update);
+router.patch("/answer/:id", joi("updateAnswer"), jwt.userAccess, answerController.update);
 router.delete("/answer/:id", jwt.userAccess, answerController.delete);
 
 router.get("/favorite", favoriteController.get);
