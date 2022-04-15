@@ -2,7 +2,7 @@ import Joi from 'joi';
 import validation from '../config/validation'
 import { Request, Response, NextFunction } from "express";
 
-type ReadingTypes = 'user' | 'discipline' | 'subject' | 'vestibular' | 'comment' | 'answer' | 'favorite' | 'question' | 'ownVestibular';
+type ReadingTypes = 'user' | 'discipline' | 'subject' | 'vestibular' | 'comment' | 'updateComment' | 'answer' | 'favorite' | 'question' | 'ownVestibular';
 
 export default (config: ReadingTypes) => (req: Request, res: Response, next: NextFunction) => {
     const schema = Joi.object(validation[config]).options({

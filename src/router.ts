@@ -44,7 +44,7 @@ router.delete("/vestibular/:id", vestibularController.delete);
 
 router.get("/comment", commentController.get);
 router.post("/comment", joi("comment"), jwt.userAccess, commentController.create);
-router.patch("/comment/:id", joi("comment"), jwt.userAccess, commentController.update);
+router.patch("/comment/:id", joi("updateComment"), jwt.userAccess, commentController.update);
 router.delete("/comment/:id", jwt.userAccess, commentController.delete);
 
 router.get("/answer", answerController.get);

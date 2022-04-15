@@ -24,8 +24,13 @@ export default {
         name:  Joi.string().min(3).max(60).required(),
     },
     comment: {
-        // comment: Joi.string().min(1).max(300).required(),
-        // questionId: Joi.number().required()
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        comment: Joi.string().min(1).max(300).required(),
+        questionId: Joi.number().required()
+    },
+    updateComment: {
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        comment: Joi.string().min(1).max(300).required()
     },
     answer: {
         
