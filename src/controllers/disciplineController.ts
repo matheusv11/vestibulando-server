@@ -15,9 +15,17 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name } = req.body
+        const { name } = req.body;
         // EVITAR MATERIA REPETIDA
         // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
+
+        const discipline = await prisma.disciplines.findFirst({
+            where: {
+                name
+            }
+        });
+
+        if(discipline) return res.status(401).send({ message: "Matéria já criada"});
 
         await prisma.disciplines.create({
             data: { // AO CRIAR UMA MATÉRIA DEVERIAR CRIAR OS ASSUNTOS TAMBÉM? // E PODERIA PEGAR OS ASSUNTOS ANTIGOS
@@ -39,9 +47,6 @@ export default {
         })
 
         if(!discipline) return res.status(400).send({ message: "Matéria não encontrada"})
-        // VALIDAR SE EXISTE PARA ATUALIZAR
-        // EVITAR MATERIA REPETIDA
-        // PODERIA RECEBER UM ARRAY E VALIDAR PARA CADASTRAR VARIOS
 
         await prisma.disciplines.update({
             where: {
@@ -58,8 +63,6 @@ export default {
     async delete(req: Request, res: Response) {
         const { id } = req.params;
 
-        // VALIDAR SE EXISTE PARA DELETAR
-
         const discipline = await prisma.disciplines.findUnique({
             where: {
                 id: parseInt(id)
@@ -72,7 +75,7 @@ export default {
             where: {
                 id: parseInt(id)
             }
-        })
+        });
 
         return res.status(201).send({ message: "Matéria deletada com sucesso" }); // MUDAR STATUS
     },
