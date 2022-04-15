@@ -22,7 +22,6 @@ export default {
     },
     vestibular: {
         name:  Joi.string().min(3).max(60).required(),
-        disciplinesId: Joi.array().required()
     },
     comment: {
         // comment: Joi.string().min(1).max(300).required(),

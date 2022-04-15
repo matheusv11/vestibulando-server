@@ -18,17 +18,19 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name, disciplinesId } = req.body
-        // VALIDAR ESSES ID
+        const { name } = req.body;
+
+        const vestibular = await prisma.vestibulars.findFirst({
+            where: {
+                name
+            }
+        });
+
+        if(vestibular) return res.status(400).send({ message: "Vestibular já criado"});
 
         await prisma.vestibulars.create({
             data: {
-                name,
-                vestibular_disciplines: {
-                    createMany: {
-                        data: disciplinesId.map((id: any) => id = { discipline_id: parseInt(id) })
-                    }
-                }
+                name
             },
         });
 
@@ -38,7 +40,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { name, disciplinesId } = req.body;
+        const { name } = req.body;
         const { id } = req.params;
 
         const vestibular = await prisma.vestibulars.findUnique({
@@ -55,14 +57,6 @@ export default {
             },
             data: {
                 name
-                // vestibular_disciplines: { // PENDENTE
-                //     updateMany: {
-                //         where: {
-                //             vestibular_id: parseInt(id)
-                //         },
-                //         data: disciplinesId.map((id: any) => id = { discipline_id: parseInt(id) })
-                //     }
-                // }
             },
         });
 
