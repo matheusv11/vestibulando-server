@@ -15,6 +15,6 @@ app.use(handleRejection);
 
 app.use(routes);
 
-app.use(handleErrors);
+// app.use(handleErrors);
 
 app.listen(port, ()=> console.log(`Backend Running in ${port}`));
