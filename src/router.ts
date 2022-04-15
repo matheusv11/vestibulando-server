@@ -64,7 +64,7 @@ router.delete("/question/:id", questionController.delete);
 router.get("/own-vestibular", ownVestibularController.get);
 router.post("/own-vestibular", joi("ownVestibular"), jwt.userAccess, ownVestibularController.create);
 router.patch("/own-vestibular/:id", joi("ownVestibular"), jwt.userAccess, ownVestibularController.update);
-router.delete("/own-vestibular/:id", ownVestibularController.delete);
+router.delete("/own-vestibular/:id", jwt.userAccess, ownVestibularController.delete);
 
 router.post("/auth", authController.auth);
 router.post("/token", authController.token)
