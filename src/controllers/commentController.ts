@@ -18,8 +18,13 @@ export default {
         const { comment, questionId } = req.body
         const { userId } = res.locals
 
-        // BOM VALIDAR O QUESTIONID E USERID
-        // OU UM CATCH GLOBAL PARA DISPARAR OS ERROS
+        const question = await prisma.questions.findUnique({
+            where: {
+                id: parseInt(questionId)
+            }
+        });
+
+        if(!question) return res.status(400).send({ message: "Questão não encontrada"});
 
         await prisma.comments.create({
             data: {
@@ -39,9 +44,10 @@ export default {
         const { id } = req.params;
         const { userId } = res.locals
 
-        const comment = await prisma.comments.findUnique({
+        const comment = await prisma.comments.findFirst({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
         });
 
@@ -66,11 +72,12 @@ export default {
         const { id } = req.params;
         const { userId } = res.locals
 
-        const comment = await prisma.comments.findUnique({
+        const comment = await prisma.comments.findFirst({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
-        })
+        });
 
         if(!comment) return res.status(400).send({ message: "Comentário não encontrado"});
 
