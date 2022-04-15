@@ -48,7 +48,8 @@ export default {
     },
     question: {
         name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
-        alternatives: Joi.string().required(),
+        alternatives: Joi.array().required(),
+        title: Joi.string().required(),
         answer: Joi.string().required(),
         disciplineId: Joi.number().required(),
         vestibularId: Joi.number().required(),

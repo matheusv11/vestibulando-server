@@ -33,8 +33,34 @@ export default {
     async create(req: Request, res: Response) {
         const { alternatives, title, answer, disciplineId, vestibularId, subjectsId } = req.body
 
-        console.log("Sim")
-        // VALIDAR OS SUBJECT ID
+        const discipline = await prisma.disciplines.findUnique({
+            where: {
+                id: parseInt(disciplineId)
+            }
+        });
+
+        if(!discipline) return res.status(400).send({ message: "Matéria não encontrada" });
+
+        const vestibular = await prisma.vestibulars.findUnique({
+            where: {
+                id: parseInt(vestibularId)
+            }
+        });
+
+        if(!vestibular) return res.status(400).send({ message: "Vestibular não encontrado" });
+
+        // VALIDAR SUBJECTS PELA DISCIPLINE
+
+        const subjects = await prisma.subjects.findFirst({ // OU FIND MANY, PARA VALIDAR O RESTANTE, USAR UM FILTER
+            where: {
+                id: {
+                    in: subjectsId
+                }
+            }
+        });
+
+        if(!subjects) return res.status(400).send({ message: "Assunto não encontrado" });
+        
         // EVITAR SUBJECT REPETIDO`
         // EVITAR QUE O SUBJECT ID SEJA DE OUTRA MATÉRIA
         
