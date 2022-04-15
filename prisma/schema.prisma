@@ -27,14 +27,12 @@ model disciplines { // Matérias //DISCIPLINE
   name  String
   questions questions[]
   subjects subjects[]
-  vestibular_disciplines vestibular_disciplines[] 
 }
 
 model vestibulars { // ENTRANCE_EXAM
   // VESTIBULAR GENERICO
   id    Int     @id @default(autoincrement())
   name  String
-  vestibular_disciplines vestibular_disciplines[]
   questions         questions[]
 }
 
@@ -73,14 +71,6 @@ model own_vestibulars {
   timer Int // HORAS : MINUTOS : SEGUNDOS // VAI SER O TEMPO EM SEGUNDOS NO CASO // AI SO CONVERTER
   own_vestibular_questions own_vestibular_questions[]
   user          users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-}
-
-model vestibular_disciplines { // TABELA PIVÔ
-  id              Int   @id @default(autoincrement())
-  vestibular_id   Int
-  discipline_id        Int
-  vestibular             vestibulars @relation(fields: [vestibular_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  discipline                  disciplines      @relation(fields: [discipline_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model question_subjects { // TABELA PIVÔ // UMA QUESTAO PODE CONTER VARIOS ASSUNTOS
