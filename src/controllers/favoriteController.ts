@@ -18,17 +18,22 @@ export default {
         const { questionId } = req.body
         const { userId } = res.locals
 
-        //VALIDAR SE EXISTEM USERID E QUESTION ID
-
-        // EVITAR RE-FAVORITAR QUESTÃO
         const favorite = await prisma.favorite_questions.findFirst({
             where: {
                 user_id: parseInt(userId),
                 question_id: parseInt(questionId)
             }
         });
-
+        
         if(favorite) return res.status(400).send({ message: "Questão já favoritada"});
+        
+        const question = await prisma.questions.findUnique({
+            where: {
+                id: parseInt(questionId)
+            }
+        });
+
+        if(!question) return res.status(400).send({ message: "Questão não encontrada" });
 
         await prisma.favorite_questions.create({
             data: {
@@ -46,9 +51,10 @@ export default {
         const { id } = req.params;
         const { userId } = res.locals
 
-        const favorite = await prisma.favorite_questions.findUnique({
+        const favorite = await prisma.favorite_questions.findFirst({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
         });
 

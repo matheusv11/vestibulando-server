@@ -42,7 +42,8 @@ export default {
         selected: Joi.string().min(1).max(2).required()
     },
     favorite: {
-
+        name:  Joi.string().allow(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        questionId: Joi.number().required()
     },
     question: {
         // alternatives: Joi.string().required(),
