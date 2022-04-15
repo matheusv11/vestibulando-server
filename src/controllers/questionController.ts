@@ -6,7 +6,8 @@ const prisma = new PrismaClient() // INSTANCIAR PRISMA EM TODA APLICAÇÃO
 export default {
     async get(req: Request, res: Response) {
 
-        // console.log("Request", res.locals.id);
+        const { userId } = res.locals;
+
         const response = await prisma.questions.findMany({ // TIPAR RETORNO
             include: {
                 discipline: true,
@@ -14,6 +15,11 @@ export default {
                 question_subjects: {
                     include: {
                         subject: true
+                    }
+                },
+                favorite_questions: {
+                    where: {
+                        user_id: parseInt(userId) || 0 // NÃO CORRE RISCO DE VIR DADOS DO USUARIO NÃO LOGADO
                     }
                 }
             }

@@ -47,5 +47,20 @@ export default { // COLOCA SO UMA FUNÇÃO QUE RECEBE O TIPO DE USUARIO
         // })
         
 
-    }
+    },
+
+    userOptionalAccess(req: Request, res: Response, next: NextFunction) { // O REQUEST ACESS DÁ ERRO NO MIDDLEWARE, PRECISARIA DEFINIR UM CONTEXTO GLOBAL DO EXPRESS
+        const token = req.headers.authorization
+        
+        if(!token) return next()
+        
+        try{
+            const { id } = verify(token.split(' ')[1], process.env.JWT_SECRET_USER || 'secret@123') as jwtRequest // NÃO RETORNA O ERR
+            res.locals.userId = id
+            next()
+        }catch(e) {
+            next()
+        }
+
+    },
 }
