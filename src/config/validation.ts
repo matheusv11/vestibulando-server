@@ -53,7 +53,7 @@ export default {
         answer: Joi.string().required(),
         disciplineId: Joi.number().required(),
         vestibularId: Joi.number().required(),
-        subjectsId: Joi.array().required()
+        subjectsId: Joi.array().min(1).required()
     },
     ownVestibular: {
 
