@@ -55,7 +55,8 @@ export default {
             where: {
                 id: {
                     in: subjectsId
-                }
+                },
+                discipline_id: parseInt(disciplineId)
             }
         });
 
