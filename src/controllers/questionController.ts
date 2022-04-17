@@ -99,6 +99,7 @@ export default {
         // REGRA DE NEGOCIO, A DISCIPLINA TEM QUE SER PERTENCENTE AO VESTIBULAR // VAI SER INUTILIZADA AO MOMENTO
         // OS ASSUNTOS DEVEM SER DA MATERIA
         // VALIDAR SE discipline EXIST
+        // LIMITAR O TANTO DE DADOS A SEREM ALTERADOS
         // PARA FACILITAR O PROCESSO DE CRIAR OS ASSUNTOS, TODO ASSUNTO ENVIADO SEMRPRE SERÁ UM ARRAY
 
         const question = await prisma.questions.findUnique({
@@ -107,8 +108,24 @@ export default {
             }
         });
 
-        if(!question) return res.status(400).send({ message: "Matéria não encontrada"})
+        if(!question) return res.status(400).send({ message: "Questão não encontrada"})
         	
+        const discipline = await prisma.disciplines.findUnique({
+            where: {
+                id: parseInt(disciplineId)
+            }
+        });
+
+        if(!discipline) return res.status(400).send({ message: "Matéria não encontrada" });
+
+        const vestibular = await prisma.vestibulars.findUnique({
+            where: {
+                id: parseInt(vestibularId)
+            }
+        });
+
+        if(!vestibular) return res.status(400).send({ message: "Vestibular não encontrado" });
+
         await prisma.questions.update({
             where: {
                 id: parseInt(id)
@@ -134,13 +151,11 @@ export default {
 
         await prisma.$disconnect();
 
-        return res.status(201).send({ message: "Matéria atualizada com sucesso" }); // MUDAR STATUS
+        return res.status(201).send({ message: "Questão atualizada com sucesso" }); // MUDAR STATUS
     },
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
-
-        // VERIFICAR SE DELETA RELAÇÃO
 
         const question = await prisma.questions.findUnique({
             where: {
@@ -154,7 +169,7 @@ export default {
             where: {
                 id: parseInt(id)
             }
-        })
+        });
 
         await prisma.$disconnect();
 
