@@ -51,7 +51,7 @@ export default {
 
         // VALIDAR SUBJECTS PELA DISCIPLINE
 
-        const subjects = await prisma.subjects.findFirst({ // OU FIND MANY, PARA VALIDAR O RESTANTE, USAR UM FILTER
+        const subjects = await prisma.subjects.findMany({ // OU FIND MANY, PARA VALIDAR O RESTANTE, USAR UM FILTER
             where: {
                 id: {
                     in: subjectsId
@@ -59,8 +59,13 @@ export default {
             }
         });
 
-        if(!subjects) return res.status(400).send({ message: "Assunto não encontrado" });
-        
+        const notInSubjects = subjectsId.filter((e: any) => {
+            return !subjects.find(sub => sub.id === e); // SE PROCURAR DIFERENTE, SEMPRE VAI TER, ENTÃO MELHOR NEGAR
+        });
+
+        if(notInSubjects[0]) return res.status(400).send({ message: `Os assuntos ${notInSubjects} não existem`});
+
+        // PODE CADASTRAR COM ASSUNTO VAZIO?
         // EVITAR SUBJECT REPETIDO`
         // EVITAR QUE O SUBJECT ID SEJA DE OUTRA MATÉRIA
         
