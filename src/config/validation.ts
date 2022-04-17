@@ -56,7 +56,9 @@ export default {
         subjectsId: Joi.array().min(1).required()
     },
     ownVestibular: {
-
+        name:  Joi.string().min(3).max(60).required(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
+        timer: Joi.number().required(),
+        questionsId: Joi.array().min(1).required()
     },
     messages: {
         "string.base": `{#key} precisar ser um 'texto'`,

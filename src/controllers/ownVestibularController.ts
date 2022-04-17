@@ -22,8 +22,22 @@ export default {
     },
 
     async create(req: Request, res: Response) {
-        const { name, timer, questionsId } = req.body
-        const { userId } = res.locals
+        const { name, timer, questionsId } = req.body;
+        const { userId } = res.locals;
+
+        const questions = await prisma.questions.findMany({ // OU FIND MANY, PARA VALIDAR O RESTANTE, USAR UM FILTER
+            where: {
+                id: {
+                    in: questionsId
+                }
+            }
+        });
+
+        const notInQuestions = questionsId.filter((e: any) => {
+            return !questions.find(sub => sub.id === e); // SE PROCURAR DIFERENTE, SEMPRE VAI TER, ENTÃO MELHOR NEGAR
+        });
+
+        if(notInQuestions[0]) return res.status(400).send({ message: `As questões ${notInQuestions} não existem`});
 
         await prisma.own_vestibulars.create({
             data: {
@@ -44,7 +58,7 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { name, timer, questionsId } = req.body; // PEGAR O USER_ID, MAS SO PARA O WHERE
+        const { name, timer, questionsId } = req.body;
         const { id } = req.params;
         const { userId } = res.locals
 
@@ -79,11 +93,12 @@ export default {
         const { id } = req.params;
         const { userId } = res.locals
 
-        const vestibular = await prisma.own_vestibulars.findUnique({
+        const vestibular = await prisma.own_vestibulars.findFirst({
             where: {
-                id: parseInt(id)
+                id: parseInt(id),
+                user_id: parseInt(userId)
             }
-        })
+        });
 
         if(!vestibular) return res.status(400).send({ message: "Vestibular próprio não encontrado"});
 
