@@ -35,7 +35,7 @@ export default {
         if(!question) return res.status(400).send({ message: "Questão não encontrada"});
         
         // VALIDAR SE O SELECTED TÁ NA FAIXA DE ALTERNATIVAS
-        await prisma.answers.create({
+        const create = await prisma.answers.create({
             data: {
                 correct: question?.answer === selected,
                 selected,
@@ -47,7 +47,7 @@ export default {
 
         await prisma.$disconnect();
 
-        return res.status(201).send({ message: "Resposta criada com sucesso" });
+        return res.status(201).send({ id: create.id, message: "Resposta criada com sucesso" });
     },
 
     async update(req: Request, res: Response) {

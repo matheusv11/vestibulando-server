@@ -21,6 +21,11 @@ export default {
                     where: {
                         user_id: parseInt(userId) || 0 // NÃO CORRE RISCO DE VIR DADOS DO USUARIO NÃO LOGADO
                     }
+                },
+                answers: {
+                    where: {
+                        user_id: parseInt(userId) || 0 // APENAS RESPOSTA DO USUARIO LOGADO OU DE NINGUEM
+                    }
                 }
             }
         });
