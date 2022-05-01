@@ -35,7 +35,7 @@ export default {
 
         if(!question) return res.status(400).send({ message: "Questão não encontrada" });
 
-        await prisma.favorite_questions.create({
+        const create = await prisma.favorite_questions.create({
             data: {
                 user_id: parseInt(userId),
                 question_id: parseInt(questionId)
@@ -44,7 +44,7 @@ export default {
         
         await prisma.$disconnect();
 
-        return res.status(201).send({ message: "Questão favoritada com sucesso" });
+        return res.status(201).send({ id: create.id, message: "Questão favoritada com sucesso" });
     },
 
     async delete(req: Request, res: Response) {
