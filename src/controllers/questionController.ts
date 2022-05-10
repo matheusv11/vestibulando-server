@@ -6,9 +6,27 @@ const prisma = new PrismaClient() // INSTANCIAR PRISMA EM TODA APLICAÇÃO
 export default {
     async get(req: Request, res: Response) {
 
+        const { year, vestibularIds, disciplineIds, subjectIds, page = 1, totalPerPage = 5 } = req.query as any; // TIPAR // CASO TENHA, O JOI OBRIGA OS TIPO ARRAY
         const { userId } = res.locals;
+        
+        console.log('teste', disciplineIds);
 
         const response = await prisma.questions.findMany({ // TIPAR RETORNO
+            where: {
+                vestibular_id: {
+                    in: vestibularIds?.map((e: string) => parseInt(e))
+                },
+                discipline_id: {
+                    in: disciplineIds?.map((e: string) => parseInt(e))
+                },
+                question_subjects: {
+                    some: {
+                        subject_id: {
+                            in: subjectIds?.map((e: string) => parseInt(e)) // 
+                        }
+                    }
+                }
+            },
             include: {
                 discipline: true,
                 vestibular: true,
