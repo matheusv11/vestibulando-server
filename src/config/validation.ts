@@ -55,6 +55,14 @@ export default {
         vestibularId: Joi.number().required(),
         subjectsId: Joi.array().min(1).required()
     },
+    queryQuestions: { // OPCIONAIS
+        name:  Joi.string().allow(),
+        vestibularIds: Joi.array().items(Joi.number()).min(1),
+        disciplineIds: Joi.array().items(Joi.number()).min(1),
+        subjectIds: Joi.array().items(Joi.number()).min(1),
+        page: Joi.number().min(1),
+        totalPerPage: Joi.number().min(5)
+    },
     ownVestibular: {
         name:  Joi.string().min(3).max(60).required(), // APENAS PARA O TS NÃO RECLAMAR DEPOIS REMOVER
         timer: Joi.number().required(),

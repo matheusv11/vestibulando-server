@@ -56,7 +56,7 @@ router.get("/favorite", favoriteController.get);
 router.post("/favorite", joi("favorite"), jwt.userAccess, favoriteController.create);
 router.delete("/favorite/:id", jwt.userAccess, favoriteController.delete);
 
-router.get("/question", jwt.userOptionalAccess, questionController.get);
+router.get("/question", joi("queryQuestions"), jwt.userOptionalAccess, questionController.get);
 router.post("/question", joi("question"), questionController.create);
 router.patch("/question/:id", joi("question"), questionController.update);
 router.delete("/question/:id", questionController.delete);
