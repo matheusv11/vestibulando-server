@@ -25,6 +25,7 @@ import ownVestibularController from "./controllers/ownVestibularController";
 // LIMITAR ROTAS
 
 router.get("/user", userController.get);
+router.get("/user-profile", jwt.userAccess, userController.actualUser);
 router.post("/user", joi("user"), userController.create);
 
 router.get("/discipline", disciplineController.get);

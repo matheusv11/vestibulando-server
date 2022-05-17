@@ -13,6 +13,18 @@ export default {
         return res.status(200).send(response);
     },
 
+    async actualUser(req: Request, res: Response) { // CONTROLLER DE PROFILE?
+        const { userId } = res.locals;
+
+        const user = await prisma.users.findUnique({
+            where: {
+                id: parseInt(userId)
+            }
+        });
+
+        return res.status(200).send(user)
+    },
+
     async create(req: Request, res: Response) {
         const { name , email, password } = req.body // TIPAR
         
